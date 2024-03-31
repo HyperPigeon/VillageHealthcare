@@ -10,6 +10,8 @@ import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.village.VillagerProfession;
@@ -80,6 +82,7 @@ public class BlacksmithVillagerTask extends MultiTickTask<VillagerEntity> {
             this.nextResponseTime = l + 10L;
             target.heal(25F);
             float g = 1.0F + (target.getRandom().nextFloat() - target.getRandom().nextFloat()) * 0.2F;
+            produceParticles(target);
             target.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, g);
         }
 
@@ -101,5 +104,17 @@ public class BlacksmithVillagerTask extends MultiTickTask<VillagerEntity> {
     private static void holdNothing(VillagerEntity villager) {
         villager.equipStack(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
         villager.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.085F);
+    }
+
+    protected void produceParticles(IronGolemEntity targetGolem) {
+        for(int i = 0; i < 5; ++i) {
+            double d = targetGolem.getRandom().nextGaussian() * 0.02;
+            double e = targetGolem.getRandom().nextGaussian() * 0.02;
+            double f = targetGolem.getRandom().nextGaussian() * 0.02;
+
+            if(!targetGolem.getWorld().isClient()) {
+                ((ServerWorld)targetGolem.getWorld()).spawnParticles((ParticleEffect) ParticleTypes.SCRAPE,targetGolem.getParticleX(1), targetGolem.getRandomBodyY() + 0.5, targetGolem.getParticleZ(1), 0,  d, e, f, 0.0);
+            }
+        }
     }
 }

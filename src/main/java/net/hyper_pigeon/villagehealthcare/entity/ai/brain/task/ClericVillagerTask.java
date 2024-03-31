@@ -6,11 +6,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.*;
 import net.minecraft.entity.ai.brain.task.LookTargetUtil;
 import net.minecraft.entity.ai.brain.task.MultiTickTask;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.server.world.ServerWorld;
@@ -79,8 +79,8 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
     protected void keepRunning(ServerWorld serverWorld, VillagerEntity villagerEntity, long l) {
         if (villagerEntity.squaredDistanceTo(target) <= 4 && l > this.nextResponseTime) {
             this.nextResponseTime = l + 10L;
-            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.INSTANT_HEALTH,5);
-            target.addStatusEffect(statusEffectInstance, villagerEntity);
+            target.heal(5F);
+            produceParticles(target);
             target.playSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK,0.8F,1.0F);
         }
 
@@ -104,5 +104,17 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
         villager.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.085F);
     }
 
+
+    protected void produceParticles(VillagerEntity targetVillager) {
+        for(int i = 0; i < 5; ++i) {
+            double d = targetVillager.getRandom().nextGaussian() * 0.02;
+            double e = targetVillager.getRandom().nextGaussian() * 0.02;
+            double f = targetVillager.getRandom().nextGaussian() * 0.02;
+
+            if(!targetVillager.getWorld().isClient()) {
+                ((ServerWorld)targetVillager.getWorld()).spawnParticles((ParticleEffect) ParticleTypes.HAPPY_VILLAGER,targetVillager.getParticleX(1), targetVillager.getRandomBodyY() + 1.0, targetVillager.getParticleZ(1), 0,  d, e, f, 0.0);
+            }
+        }
+    }
 
 }
