@@ -76,9 +76,6 @@ public class BlacksmithVillagerTask extends MultiTickTask<VillagerEntity> {
     }
 
     protected void keepRunning(ServerWorld serverWorld, VillagerEntity villagerEntity, long l) {
-        System.out.println(villagerEntity.getMainHandStack());
-        System.out.println(villagerEntity.getMainHandStack().isEmpty());
-
         if (villagerEntity.squaredDistanceTo(target) <= 4 && l > this.nextResponseTime) {
             this.nextResponseTime = l + 10L;
             target.heal(25F);
