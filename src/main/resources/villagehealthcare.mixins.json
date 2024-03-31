@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.hyper_pigeon.villagehealthcare.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "VillagerTaskListProviderMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

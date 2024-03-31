@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "villagehealthcare",
+  "version": "${version}",
+  "name": "VillageHealthcare",
+  "description": "A mod that lets clerics and blacksmiths heal villagers and iron golems respectively. ",
+  "authors": [
+    "HyperPigeon"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/VillageHealthcare/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.hyper_pigeon.villagehealthcare.client.VillageHealthcareClient"
+    ],
+    "main": [
+      "net.hyper_pigeon.villagehealthcare.VillageHealthcare"
+    ]
+  },
+  "mixins": [
+    "villagehealthcare.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.7",
+    "fabric": "*",
+    "minecraft": "1.20.1"
+  }
+}
