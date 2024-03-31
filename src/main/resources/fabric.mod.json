@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "id": "villagehealthcare",
   "version": "${version}",
-  "name": "VillageHealthcare",
+  "name": "Village Healthcare",
   "description": "A mod that lets clerics and blacksmiths heal villagers and iron golems respectively. ",
   "authors": [
     "HyperPigeon"
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/VillageHealthcare/icon.png",
+  "icon": "assets/villagehealthcare/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
