@@ -75,13 +75,14 @@ public class BlacksmithVillagerTask extends MultiTickTask<VillagerEntity> {
         holdNothing(villagerEntity);
         this.ticksRan = 0;
         this.nextResponseTime = l + 40L;
+
     }
 
     protected void keepRunning(ServerWorld serverWorld, VillagerEntity villagerEntity, long l) {
         villagerEntity.equipStack(EquipmentSlot.MAINHAND,  new ItemStack(Items.IRON_INGOT));
         villagerEntity.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.0F);
 
-        if (villagerEntity.squaredDistanceTo(target) <= 4 && l > this.nextResponseTime) {
+        if (villagerEntity.squaredDistanceTo(target) <= 6 && l > this.nextResponseTime) {
             this.nextResponseTime = l + 10L;
             target.heal(25F);
             float g = 1.0F + (target.getRandom().nextFloat() - target.getRandom().nextFloat()) * 0.2F;
