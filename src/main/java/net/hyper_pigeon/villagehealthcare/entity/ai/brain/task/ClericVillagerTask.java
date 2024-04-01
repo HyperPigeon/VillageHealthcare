@@ -20,7 +20,7 @@ import net.minecraft.village.VillagerProfession;
 import java.util.Optional;
 
 public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
-    private static final int MAX_RUN_TIME = 1000;
+    private static final int MAX_RUN_TIME = 1600;
     public static final float WALK_SPEED = 0.5F;
 
     private int ticksRan;
@@ -77,6 +77,10 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
     }
 
     protected void keepRunning(ServerWorld serverWorld, VillagerEntity villagerEntity, long l) {
+
+        villagerEntity.equipStack(EquipmentSlot.MAINHAND,  PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.HEALING));
+        villagerEntity.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.0F);
+
         if (villagerEntity.squaredDistanceTo(target) <= 4 && l > this.nextResponseTime) {
             this.nextResponseTime = l + 10L;
             target.heal(5F);
@@ -84,8 +88,10 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
             target.playSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK,0.8F,1.0F);
         }
 
+        villagerEntity.getBrain().remember(MemoryModuleType.INTERACTION_TARGET, target);
         villagerEntity.getBrain().remember(MemoryModuleType.LOOK_TARGET, new EntityLookTarget(target, true));
         villagerEntity.getBrain().remember(MemoryModuleType.WALK_TARGET, new WalkTarget(target, WALK_SPEED, 2));
+
         ++this.ticksRan;
 
     }

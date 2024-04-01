@@ -15,8 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = VillagerTaskListProvider.class, priority = 1)
 public class VillagerTaskListProviderMixin {
-    //Pair.of(new GoToNearbyPositionTask(MemoryModuleType.JOB_SITE, 0.4f, 1, 10), 5)
-
     @Inject(at = @At("RETURN"), method = "createCoreTasks(Lnet/minecraft/village/VillagerProfession;F)Lcom/google/common/collect/ImmutableList;", cancellable = true)
     private static void createCoreTasks(VillagerProfession profession, float speed, CallbackInfoReturnable<ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>>> cir) {
         cir.setReturnValue(ImmutableList.<Pair<Integer, ? extends Task<? super VillagerEntity>>>builder().
