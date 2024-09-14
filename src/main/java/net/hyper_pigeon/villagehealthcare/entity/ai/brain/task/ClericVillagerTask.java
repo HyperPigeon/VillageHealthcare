@@ -1,6 +1,7 @@
 package net.hyper_pigeon.villagehealthcare.entity.ai.brain.task;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.*;
@@ -11,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -55,7 +55,7 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
 
     protected void run(ServerWorld serverWorld, VillagerEntity villagerEntity, long l) {
         if(l > this.nextResponseTime && target != null) {
-            villagerEntity.equipStack(EquipmentSlot.MAINHAND,  PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.HEALING));
+            villagerEntity.equipStack(EquipmentSlot.MAINHAND,  PotionContentsComponent.createStack(Items.POTION, Potions.HEALING));
             villagerEntity.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.0F);
 
             villagerEntity.getBrain().remember(MemoryModuleType.INTERACTION_TARGET, target);
@@ -78,7 +78,7 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
 
     protected void keepRunning(ServerWorld serverWorld, VillagerEntity villagerEntity, long l) {
 
-        villagerEntity.equipStack(EquipmentSlot.MAINHAND,  PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.HEALING));
+        villagerEntity.equipStack(EquipmentSlot.MAINHAND,  PotionContentsComponent.createStack(Items.POTION, Potions.HEALING));
         villagerEntity.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.0F);
 
         if (villagerEntity.squaredDistanceTo(target) <= 6 && l > this.nextResponseTime) {
