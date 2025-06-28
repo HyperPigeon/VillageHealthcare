@@ -5,8 +5,8 @@ import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.*;
-import net.minecraft.entity.ai.brain.task.LookTargetUtil;
 import net.minecraft.entity.ai.brain.task.MultiTickTask;
+import net.minecraft.entity.ai.brain.task.TargetUtil;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -62,7 +62,7 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
             villagerEntity.getBrain().remember(MemoryModuleType.LOOK_TARGET, new EntityLookTarget(target, true));
             villagerEntity.getBrain().remember(MemoryModuleType.WALK_TARGET, new WalkTarget(target, WALK_SPEED, 1));
 
-            LookTargetUtil.lookAt(villagerEntity, target);
+            TargetUtil.lookAt(villagerEntity, target);
         }
     }
 
@@ -85,7 +85,7 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
             this.nextResponseTime = l + 10L;
             target.heal(5F);
             produceParticles(target);
-            target.playSound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK,0.8F,1.0F);
+            target.playSound(SoundEvents.ENTITY_WANDERING_TRADER_DRINK_POTION,0.8F,1.0F);
         }
 
         villagerEntity.getBrain().remember(MemoryModuleType.INTERACTION_TARGET, target);
