@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.*;
-import net.minecraft.entity.ai.brain.task.LookTargetUtil;
 import net.minecraft.entity.ai.brain.task.MultiTickTask;
+import net.minecraft.entity.ai.brain.task.TargetUtil;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.ItemStack;
@@ -63,7 +63,7 @@ public class BlacksmithVillagerTask extends MultiTickTask<VillagerEntity> {
             villagerEntity.getBrain().remember(MemoryModuleType.LOOK_TARGET, new EntityLookTarget(target, true));
             villagerEntity.getBrain().remember(MemoryModuleType.WALK_TARGET, new WalkTarget(target, WALK_SPEED, 1));
 
-            LookTargetUtil.lookAt(villagerEntity, target);
+            TargetUtil.lookAt(villagerEntity, target);
         }
     }
 
