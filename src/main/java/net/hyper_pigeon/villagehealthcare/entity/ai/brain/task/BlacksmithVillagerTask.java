@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.village.VillagerProfession;
@@ -42,8 +43,10 @@ public class BlacksmithVillagerTask extends MultiTickTask<VillagerEntity> {
     }
 
     protected boolean shouldRun(ServerWorld serverWorld, VillagerEntity villagerEntity) {
-        if (villagerEntity.isAlive() && (villagerEntity.getVillagerData().getProfession() == VillagerProfession.ARMORER || villagerEntity.getVillagerData().getProfession() == VillagerProfession.TOOLSMITH
-        || villagerEntity.getVillagerData().getProfession() == VillagerProfession.WEAPONSMITH)) {
+        RegistryKey<VillagerProfession> profession = villagerEntity.getVillagerData().profession().getKey().get();
+
+        if (villagerEntity.isAlive() && (profession == VillagerProfession.ARMORER || profession == VillagerProfession.TOOLSMITH
+        || profession == VillagerProfession.WEAPONSMITH)) {
             Optional<LivingEntity> injuredIronGolemOption = getNearestInjuredIronGolem(villagerEntity);
             if (injuredIronGolemOption.isPresent()) {
                 this.target = (IronGolemEntity) injuredIronGolemOption.get();

@@ -13,6 +13,7 @@ import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.Potions;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.village.VillagerProfession;
@@ -43,7 +44,9 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
     }
 
     protected boolean shouldRun(ServerWorld serverWorld, VillagerEntity villagerEntity) {
-        if (villagerEntity.isAlive() && villagerEntity.getVillagerData().getProfession() == VillagerProfession.CLERIC) {
+        RegistryKey<VillagerProfession> profession = villagerEntity.getVillagerData().profession().getKey().get();
+
+        if (villagerEntity.isAlive() && profession == VillagerProfession.CLERIC) {
             Optional<LivingEntity> injuredVillagerOptional = getNearestInjuredVillager(villagerEntity);
             if (injuredVillagerOptional.isPresent()) {
                 this.target = (VillagerEntity) injuredVillagerOptional.get();
