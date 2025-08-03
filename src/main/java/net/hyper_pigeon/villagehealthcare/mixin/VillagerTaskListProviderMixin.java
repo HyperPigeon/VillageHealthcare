@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = VillagerTaskListProvider.class, priority = 1)
 public class VillagerTaskListProviderMixin {
     @ModifyReturnValue(at = @At("RETURN"), method = "createCoreTasks")
-    private static void createCoreTasks(ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>> original) {
+    private static ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>> createCoreTasks(ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>> original) {
         return ImmutableList.<Pair<Integer, ? extends Task<? super VillagerEntity>>>builder().
                 addAll(original).
                 add(Pair.of(4, new ClericVillagerTask())).
