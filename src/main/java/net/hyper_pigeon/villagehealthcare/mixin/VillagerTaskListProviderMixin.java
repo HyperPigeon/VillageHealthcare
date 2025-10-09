@@ -7,23 +7,19 @@ import net.hyper_pigeon.villagehealthcare.entity.ai.brain.task.ClericVillagerTas
 import net.minecraft.entity.ai.brain.task.Task;
 import net.minecraft.entity.ai.brain.task.VillagerTaskListProvider;
 import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.village.VillagerProfession;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 @Mixin(value = VillagerTaskListProvider.class, priority = 1)
 public class VillagerTaskListProviderMixin {
-    @Inject(at = @At("RETURN"), method = "createCoreTasks", cancellable = true)
-    private static void createCoreTasks(RegistryEntry<VillagerProfession> profession, float speed, CallbackInfoReturnable<ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>>> cir) {
-        cir.setReturnValue(ImmutableList.<Pair<Integer, ? extends Task<? super VillagerEntity>>>builder().
-                addAll(cir.getReturnValue()).
+    @ModifyReturnValue(at = @At("RETURN"), method = "createCoreTasks")
+    private static ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>> createCoreTasks(ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>> original) {
+        return ImmutableList.<Pair<Integer, ? extends Task<? super VillagerEntity>>>builder().
+                addAll(original).
                 add(Pair.of(4, new ClericVillagerTask())).
                 add(Pair.of(4, new BlacksmithVillagerTask())).
-                build()
-        );
+                build();
     }
 
 }
