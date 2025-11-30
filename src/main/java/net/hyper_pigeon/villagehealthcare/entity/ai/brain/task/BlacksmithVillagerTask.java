@@ -121,8 +121,8 @@ public class BlacksmithVillagerTask extends MultiTickTask<VillagerEntity> {
             double e = targetGolem.getRandom().nextGaussian() * 0.02;
             double f = targetGolem.getRandom().nextGaussian() * 0.02;
 
-            if(!targetGolem.getWorld().isClient()) {
-                ((ServerWorld)targetGolem.getWorld()).spawnParticles((ParticleEffect) ParticleTypes.SCRAPE,targetGolem.getParticleX(1), targetGolem.getRandomBodyY() + 0.5, targetGolem.getParticleZ(1), 0,  d, e, f, 0.0);
+            if(!targetGolem.getEntityWorld().isClient()) {
+                ((ServerWorld)targetGolem.getEntityWorld()).spawnParticles((ParticleEffect) ParticleTypes.SCRAPE,targetGolem.getParticleX(1), targetGolem.getRandomBodyY() + 0.5, targetGolem.getParticleZ(1), 0,  d, e, f, 0.0);
             }
         }
     }

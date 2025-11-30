@@ -120,8 +120,8 @@ public class ClericVillagerTask extends MultiTickTask<VillagerEntity> {
             double e = targetVillager.getRandom().nextGaussian() * 0.02;
             double f = targetVillager.getRandom().nextGaussian() * 0.02;
 
-            if(!targetVillager.getWorld().isClient()) {
-                ((ServerWorld)targetVillager.getWorld()).spawnParticles((ParticleEffect) ParticleTypes.HAPPY_VILLAGER,targetVillager.getParticleX(1), targetVillager.getRandomBodyY() + 1.0, targetVillager.getParticleZ(1), 0,  d, e, f, 0.0);
+            if(!targetVillager.getEntityWorld().isClient()) {
+                ((ServerWorld)targetVillager.getEntityWorld()).spawnParticles((ParticleEffect) ParticleTypes.HAPPY_VILLAGER,targetVillager.getParticleX(1), targetVillager.getRandomBodyY() + 1.0, targetVillager.getParticleZ(1), 0,  d, e, f, 0.0);
             }
         }
     }
