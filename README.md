@@ -20,4 +20,7 @@ https://github.com/HyperPigeon/VillageHealthcare/assets/58276133/08c3cd37-4968-4
 ## Repairing Iron Golem
 https://github.com/HyperPigeon/VillageHealthcare/assets/58276133/b5149e13-0edb-47ae-ae4f-7f430e3d4d8d
 
+## Mod Menu Options
+<img width="2558" height="555" alt="image" src="https://github.com/user-attachments/assets/2483d7bf-24f2-434d-9ae3-ba85ad318890" />
 
+<img width="2560" height="504" alt="image" src="https://github.com/user-attachments/assets/4622e0d4-4c64-4a23-9306-a3c699fb288e" />
