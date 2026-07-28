@@ -2,8 +2,6 @@
 
 A mod that allows clerics and blacksmiths to heal injured villagers and iron golems. 
 
-Original version by HyperPigeon [here](https://github.com/HyperPigeon/VillageHealthcare)  
-
 ## Additions
 - Mod Menu integration with Cloth Config API! All options listed can be tuned to preference with live updates in-game.
 - Villagers now scan within a customizable radius around them for targets rather than relying on Line of Sight. This can be tuned up or down based on preference.
